@@ -9,3 +9,5 @@ edition = "2021"
 reqwest = { version = "0.11", features = ["blocking", "json"] }
 clap = { version = "4.0", features = ["derive"] }
 serde_json = "1.0.96"
+discord-rich-presence = "0.2.3"
+chrono = "0.4"
