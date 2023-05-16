@@ -70,9 +70,6 @@ fn set_current_game(client: &mut DiscordIpcClient, game: &String, app_id: &Strin
     Ok(())
 }
 
-// TODO: create tool to scrape images 
-//https://steamcdn-a.akamaihd.net/steam/apps/{appid}/library_600x900_2x.jpg
-// TODO: clear activity
 fn main() {
     let args = Cli::parse();
     let mut client = DiscordIpcClient::new(&args.discord_client_id).unwrap();
@@ -81,17 +78,26 @@ fn main() {
     loop {
         let game = match get_current_game(&args.steam_id, &args.steam_api_key) {
             Ok(game) => game,
-            Err(SteamError::NoGameFound()) => last_game.clone(),
+            Err(SteamError::NoGameFound()) => {
+                match client.clear_activity() {
+                    Ok(_) => (),
+                    Err(e) => {
+                        eprintln!("Error: {}", e);
+                        std::process::exit(1);
+                    }
+                };
+                last_game.clone()
+            },
             Err(e) => {
-                println!("Error: {}", e);
+                eprintln!("Error: {}", e);
                 std::process::exit(1);
             },
         };
         if game != last_game {
             match set_current_game(&mut client, &game.0, &game.1) {
-                Ok(()) => break,
+                Ok(()) => (),
                 Err(e) => {
-                    println!("Error: {}", e);
+                    eprintln!("Error: {}", e);
                     std::process::exit(2);
                 }
             }
