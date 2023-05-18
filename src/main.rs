@@ -10,15 +10,15 @@ use thiserror::Error;
 
 #[derive(Error, Debug)]
 pub enum SteamError {
-    #[error("request failed")]
+    #[error("Request failed.")]
     RequestFailed(#[from] reqwest::Error),
-    #[error("no game found")]
+    #[error("No game found.")]
     NoGameFound(),
-    #[error("player not found")]
+    #[error("Player not found.")]
     PlayerNotFound(),
-    #[error("wrong api key")]
+    #[error("Wrong api key.")]
     WrongAPIKey(),
-    #[error("failed with status {0}")]
+    #[error("Failed with status {0}.")]
     RequestStatusError(u16),
 }
 
@@ -44,7 +44,7 @@ fn get_current_game(steam_id: &String, api_key: &String) -> Result<(String, Stri
     }
 
     let json: Value = response.json()?;
-    if json["response"]["players"].as_array().unwrap().is_empty() {
+    if json["response"]["players"].as_array().ok_or(SteamError::PlayerNotFound())?.is_empty() {
         return Err(SteamError::PlayerNotFound());
     }
     let player_data = &json["response"]["players"][0];
@@ -72,20 +72,35 @@ fn set_current_game(client: &mut DiscordIpcClient, game: &String, app_id: &Strin
 
 fn main() {
     let args = Cli::parse();
-    let mut client = DiscordIpcClient::new(&args.discord_client_id).unwrap();
+    //Initial setup
+    let mut client: DiscordIpcClient;
+    //Wrong discord client ID => Error: Broken pipe (os error 32)
+    match DiscordIpcClient::new(&args.discord_client_id) {
+        Ok(discord_client) => client = discord_client,
+        Err(_) => {
+            eprintln!("Error: Failed to create the discord client. Check the client id.");
+            std::process::exit(1);
+        },
+    };
     let mut last_game = ("".to_string(), "".to_string());
-    client.connect().unwrap();
+    loop {
+        if let Err(_) = client.connect() {
+            eprintln!("Error: Failed to connect to the discord client. Is discord running?");
+            thread::sleep(Duration::from_secs(10));
+        } else {
+            break;
+        }
+    }
+
+    //Run loop
     loop {
         let game = match get_current_game(&args.steam_id, &args.steam_api_key) {
             Ok(game) => game,
             Err(SteamError::NoGameFound()) => {
-                match client.clear_activity() {
-                    Ok(_) => (),
-                    Err(e) => {
-                        eprintln!("Error: {}", e);
-                        std::process::exit(1);
-                    }
-                };
+                if let Err(e) = client.clear_activity() {
+                    eprintln!("Error: {}", e);
+                    std::process::exit(1);
+                }
                 last_game.clone()
             },
             Err(e) => {
@@ -94,15 +109,12 @@ fn main() {
             },
         };
         if game != last_game {
-            match set_current_game(&mut client, &game.0, &game.1) {
-                Ok(()) => (),
-                Err(e) => {
-                    eprintln!("Error: {}", e);
-                    std::process::exit(2);
-                }
+            if let Err(e) = set_current_game(&mut client, &game.0, &game.1) {
+                eprintln!("Error: {}", e);
+                std::process::exit(2);
             }
         }
-        thread::sleep(Duration::from_secs(30));
+        thread::sleep(Duration::from_secs(10));
         last_game = game;
     }
 }
