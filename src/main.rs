@@ -70,6 +70,7 @@ fn set_current_game(client: &mut DiscordIpcClient, game: &String, app_id: &Strin
     Ok(())
 }
 
+//test not internet or discrod closing after init
 fn main() {
     let args = Cli::parse();
     //Initial setup
@@ -101,6 +102,7 @@ fn main() {
                     eprintln!("Error: {}", e);
                     std::process::exit(1);
                 }
+                last_game = ("".to_string(), "".to_string());
                 last_game.clone()
             },
             Err(e) => {
