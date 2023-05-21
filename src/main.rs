@@ -23,15 +23,16 @@ enum SteamError {
     RequestStatusError(u16),
 }
 
+/// A CLI application designed to improve Discord activities on Linux. However, it can also be used to enhance Discord activities on other platforms. 
 #[derive(Parser)]
 struct Cli {
-    /// Your steam ID
+    /// Your Steam ID
     #[arg(long = "steamID")]
     steam_id: String,
-    /// A steam web API key
+    /// A Steam web API key
     #[arg(long = "steamAPI")]
     steam_api_key: String,
-    /// A discord Client ID, not required but can be used to add custom icons
+    /// A Discord Client ID; not required, but can be used to add custom icons
     #[arg(long = "discordClient", default_value_t = String::from("1104830381838057594"))]
     discord_client_id: String
 }
