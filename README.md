@@ -46,7 +46,7 @@ Here are the steps required to add the images of games from your Steam library:
 9. Copy the Client ID.
 10. Every time you run Steam2Discord, provide your Client ID using the `--discordClient` flag.
 
-You can find images and app IDs on [SteamDB](https://steamdb.info/), but you can also use [https://github.com/LennardKittner/SteamScraper](https://github.com/LennardKittner/SteamScraper), which can automatically download images for all the games in your Steam library.
+You can find images and app IDs on [SteamDB](https://steamdb.info/), but you can also use [SteamScraper](https://github.com/LennardKittner/SteamScraper), which can automatically download images for all the games in your Steam library.
 
 ## Building
 
@@ -56,7 +56,7 @@ You can build Steam2Discord like any other Rust application that uses Cargo:
 cargo build --release
 ```
 
-You can also download a pre-compiled version from [https://github.com/LennardKittner/Steam2Discord/releases](https://github.com/LennardKittner/Steam2Discord/releases).
+You can also download a pre-compiled version from [releases](https://github.com/LennardKittner/Steam2Discord/releases).
 
 ## FAQ
 
