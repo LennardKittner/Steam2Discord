@@ -1,7 +1,7 @@
 # Steam2Discord
 A CLI application designed to enhance Discord activities on Linux. However, it can also be used to improve Discord activities on other platforms.
 
-![](./screenshots/example.png)
+<img src=./screenshots/example.png alt="example" width="400">
 
 ## Compatibility
 
@@ -63,20 +63,22 @@ You can also download a pre-compiled version from [releases](https://github.com/
 ## FAQ
 
 **Why do I need my own Steam web API key?**
+
 There are a couple of reasons. I don't want to include my API key in the binary because it is hard to protect it from exfiltration. Another option would be to let the app connect to a proxy and forward the request with my API key. However, this would require me to host a server, and the Steam API rate limit could become a problem.
 
 **If I don't have a domain, how do I get a Steam API key?**
+
 I'm not sure, but I just used the URL of this repository, and it worked, so you could try to fork it and use that URL.
 
 **Why does it always say "playing Something ..." instead of the real game name?**
+
 The application name is "Something ...", and the Discord RPC interface doesn't allow dynamic application names. See [https://github.com/discord/discord-rpc/issues/375](https://github.com/discord/discord-rpc/issues/375).
 
 **Why is nothing happening?**
+
 Try running the application again, and if you are using your own Discord application, check the Client ID. Currently, a typo in the Client ID can't be detected.
 
 **Why is the is there no image in Discord?**
-If you are using the default Client ID it is likely that there is no image registered for that game. Discord applications can only have at most 300 images. To add more images, see the steps above.
 
-If you are using another Client ID please wait a bit.
-Discord sometimes takes some time until the image is visible.
-If the image is still not showing, please check the name of the image.
+If you are using the default Client ID it is likely that there is no image registered for that game. Discord applications can only have at most 300 images. To add more images, see the steps above.
+If you are using another Client ID please wait a bit. Discord sometimes takes some time until the image is visible.If the image is still not showing, please check the name of the image.
