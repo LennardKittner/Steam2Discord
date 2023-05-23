@@ -1,6 +1,8 @@
 # Steam2Discord
 A CLI application designed to enhance Discord activities on Linux. However, it can also be used to improve Discord activities on other platforms.
 
+![](./screenshots/example.png)
+
 ## Compatibility
 
 The tool has been tested on Linux, Windows, and macOS.
@@ -71,3 +73,10 @@ The application name is "Something ...", and the Discord RPC interface doesn't a
 
 **Why is nothing happening?**
 Try running the application again, and if you are using your own Discord application, check the Client ID. Currently, a typo in the Client ID can't be detected.
+
+**Why is the is there no image in Discord?**
+If you are using the default Client ID it is likely that there is no image registered for that game. Discord applications can only have at most 300 images. To add more images, see the steps above.
+
+If you are using another Client ID please wait a bit.
+Discord sometimes takes some time until the image is visible.
+If the image is still not showing, please check the name of the image.
