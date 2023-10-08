@@ -3,21 +3,21 @@ use serde_json::Value;
 use discord_rich_presence::activity::{Timestamps, Assets, Button};
 use discord_rich_presence::{activity, DiscordIpc, DiscordIpcClient};
 use chrono;
-use thiserror::Error;
+use thistermination::TerminationFull;
 use std::error::Error;
 
 
-#[derive(Error, Debug)]
+#[derive(TerminationFull)]
 pub enum SteamError {
-    #[error("Request failed.")]
+    #[termination(exit_code(1), msg("Request failed."))]
     RequestFailed(#[from] reqwest::Error),
-    #[error("No game found.")]
+    #[termination(exit_code(2), msg("No game found."))]
     NoGameFound(),
-    #[error("Player not found.")]
+    #[termination(exit_code(3), msg("Player not found."))]
     PlayerNotFound(),
-    #[error("Wrong api key.")]
+    #[termination(exit_code(4), msg("Wrong api key."))]
     WrongAPIKey(),
-    #[error("Failed with status {0}.")]
+    #[termination(exit_code(5), msg("Failed with status {0}."))]
     RequestStatusError(u16),
 }
 

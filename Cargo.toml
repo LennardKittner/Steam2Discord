@@ -1,6 +1,6 @@
 [package]
 name = "steam_2_discord"
-version = "0.2.0"
+version = "1.0.0"
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
@@ -11,5 +11,5 @@ clap = { version = "4.0", features = ["derive"] }
 serde_json = "1.0.96"
 discord-rich-presence = "0.2.3"
 chrono = "0.4"
-thiserror = "1.0.40"
 tokio = "1.28.2"
+thistermination = "1.1.0"
