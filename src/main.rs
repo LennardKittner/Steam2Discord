@@ -23,15 +23,7 @@ fn main() {
             std::process::exit(1);
         }
     };
-    let mut client: DiscordIpcClient;
-    //Wrong discord client ID => Error: Broken pipe (os error 32)
-    match DiscordIpcClient::new(&args.discord_client_id) {
-        Ok(discord_client) => client = discord_client,
-        Err(_) => {
-            eprintln!("Error: Failed to create the discord client. Check the client id.");
-            std::process::exit(1);
-        }
-    };
+    let mut client: DiscordIpcClient = DiscordIpcClient::new(&args.discord_client_id);
     let mut state = State::ActivityCleared;
 
     loop {

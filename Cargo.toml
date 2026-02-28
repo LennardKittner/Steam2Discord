@@ -6,11 +6,11 @@ edition = "2024"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-reqwest = { version = "0.11", features = ["blocking", "json"] }
-clap = { version = "4.0", features = ["derive"] }
-serde_json = "1.0.96"
-discord-rich-presence = "0.2.3"
+reqwest = { version = "0.13", features = ["blocking", "json"] }
+clap = { version = "4.5", features = ["derive"] }
+serde_json = "1.0.149"
+discord-rich-presence = "1.1.0"
 chrono = "0.4"
-tokio = "1.28.2"
+tokio = { version = "1.49.0", features = ["rt-multi-thread"]}
 thistermination = "1.1.0"
 procfs = "0.18.0"
