@@ -5,7 +5,7 @@ use std::time::Duration;
 use steam_2_discord::State;
 use tokio::runtime::Runtime;
 
-/// A CLI application designed to improve Discord activities on Linux. However, it can also be used to enhance Discord activities on other platforms.
+/// A CLI application designed to improve Discord activities on Linux.
 #[derive(Parser)]
 struct Cli {
     /// A Discord Client ID; not required, but can be used to add custom icons

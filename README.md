@@ -1,35 +1,27 @@
 # Steam2Discord
-A CLI application designed to enhance Discord activities on Linux. However, it can also be used to improve Discord activities on other platforms.
+A CLI application designed to enhance Discord activities on Linux. 
 
 <img src=./screenshots/example.png alt="example" width="400">
-
-## Compatibility
-
-The tool has been tested on Linux, Windows, and macOS.
 
 ## Usage
 
 ```
-Usage: steam_2_discord [OPTIONS] --steamID <STEAM_ID> --steamAPI <STEAM_API_KEY>
+A CLI application designed to improve Discord activities on Linux
+
+Usage: steam_2_discord [OPTIONS]
 
 Options:
-      --steamID <STEAM_ID>
-          Your Steam ID
-      --steamAPI <STEAM_API_KEY>
-          A Steam web API key
       --discordClient <DISCORD_CLIENT_ID>
           A Discord Client ID; not required, but can be used to add custom icons [default: 1104830381838057594]
   -h, --help
           Print help
 ```
 
-You need to provide your Steam ID and a Steam web API key.
-Your Steam ID can be found on [SteamDB](https://steamdb.info/), and you can get a Steam web API key with the following link: [https://steamcommunity.com/dev/apikey](https://steamcommunity.com/dev/apikey).
-
 The application will automatically connect to your running Discord instance.
-While running in the background, it will update your Discord presence according to the game currently being played on the Steam account associated with the provided Steam ID.
+While running in the background, it will update your Discord presence according to the game currently being played on the Steam.
 
-You can also create your own Discord application to add more game images. More information on how to do that is provided in the following section.
+You can also create your own Discord application to add more game images. 
+More information on how to do that is provided in the following section.
 
 ## Custom Images
 
@@ -62,10 +54,6 @@ You can also download a pre-compiled version from [releases](https://github.com/
 
 ## FAQ
 
-**Why do I need my own Steam web API key?**
-
-There are a couple of reasons. I don't want to include my API key in the binary because it is hard to protect it from exfiltration. Another option would be to let the app connect to a proxy and forward the request with my API key. However, this would require me to host a server, and the Steam API rate limit could become a problem.
-
 **If I don't have a domain, how do I get a Steam API key?**
 
 I'm not sure, but I just used the URL of this repository, and it worked, so you could try to fork it and use that URL.
@@ -76,9 +64,13 @@ The application name is "Something ...", and the Discord RPC interface doesn't a
 
 **Why is nothing happening?**
 
-Try running the application again, and if you are using your own Discord application, check the Client ID. Currently, a typo in the Client ID can't be detected.
+Try running the application again, and if you are using your own Discord application, check the Client ID. Currently, typos in the Client ID can't be detected.
 
 **Why is there no image in Discord?**
 
-If you are using the default Client ID it is likely that there is no image registered for that game. Discord applications can only have at most 300 images. To add more images, see the steps above.
-If you are using another Client ID please wait a bit. Discord sometimes takes some time until the image is visible.If the image is still not showing, please check the name of the image.
+If you are using the default Client ID it is likely that there is no image registered for that game. 
+Discord applications can only have at most 300 images. 
+To add more images, see the steps above.
+If you are using another Client ID please wait a bit. 
+Discord sometimes takes some time until the image is visible.
+If the image is still not showing, check the name of the image.
